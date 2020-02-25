@@ -4,9 +4,6 @@ module.exports = {
     author: `Ian McGillivray`,
     description: `Iam McGillivray Designer's PortFolio`,
     siteUrl: `https://improperdesign.com`,
-    social: {
-      twitter: `kylemathews`,
-    },
   },
   plugins: [
     {
@@ -49,17 +46,16 @@ module.exports = {
     `gatsby-plugin-sass`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    `gatsby-plugin-feed`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Gatsby Starter Blog`,
-        short_name: `GatsbyJS`,
+        name: `Improper Design PortFolio`,
+        short_name: `Improper-Design`,
         start_url: `/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `content/assets/gatsby-icon.png`,
+        icon: `content/assets/icon.png`,
       },
     },
     `gatsby-plugin-react-helmet`,
