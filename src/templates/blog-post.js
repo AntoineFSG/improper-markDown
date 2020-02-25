@@ -1,63 +1,43 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-
-import Bio from "../components/bio"
+import Img from "gatsby-image"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { rhythm, scale } from "../utils/typography"
+import SlideShow from "../components/slideShow"
+import postStyles from "../css/post.module.scss"
+import Parser from "../components/parser"
+import Gallery from "../components/gallery"
+
 
 const BlogPostTemplate = ({ data, pageContext, location }) => {
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata.title
   const { previous, next } = pageContext
+  const {sliderImages} = pageContext
+  const {galleryImages} = pageContext
 
   return (
     <Layout location={location} title={siteTitle}>
       <SEO
         title={post.frontmatter.title}
-        description={post.frontmatter.description || post.excerpt}
+        description={post.excerpt}
       />
-      <article>
-        <header>
-          <h1
-            style={{
-              marginTop: rhythm(1),
-              marginBottom: 0,
-            }}
-          >
-            {post.frontmatter.title}
-          </h1>
-          <p
-            style={{
-              ...scale(-1 / 5),
-              display: `block`,
-              marginBottom: rhythm(1),
-            }}
-          >
-            {post.frontmatter.date}
-          </p>
-        </header>
-        <section dangerouslySetInnerHTML={{ __html: post.html }} />
-        <hr
-          style={{
-            marginBottom: rhythm(1),
-          }}
-        />
-        <footer>
-          <Bio />
-        </footer>
-      </article>
-
+        <div className={postStyles.post}>
+          <h1>{post.frontmatter.title}</h1>
+          {sliderImages[0]!==undefined&&<div className={postStyles.sliderContainer}>
+            <SlideShow slides={sliderImages}/></div>}
+          <div className={postStyles.content}>
+            <div className={postStyles.imageContainer}>
+              {post.frontmatter.featuredImage.childImageSharp.fluid && <Img alt={post.frontmatter.title} fluid={post.frontmatter.featuredImage.childImageSharp.fluid} />}
+            </div>
+            <div className={postStyles.article}>
+            <Parser data={post.html}/>
+          </div>
+          {galleryImages[0]!==undefined&&<div className={postStyles.galleryContainer}><Gallery galleryImages={galleryImages}/></div>}
+        </div>
+      </div>
       <nav>
-        <ul
-          style={{
-            display: `flex`,
-            flexWrap: `wrap`,
-            justifyContent: `space-between`,
-            listStyle: `none`,
-            padding: 0,
-          }}
-        >
+        <ul>
           <li>
             {previous && (
               <Link to={previous.fields.slug} rel="prev">
@@ -87,14 +67,31 @@ export const pageQuery = graphql`
         title
       }
     }
+    allFile {
+      edges {
+        node {
+          relativePath
+          extension
+          relativeDirectory
+        }
+      }
+    }
     markdownRemark(fields: { slug: { eq: $slug } }) {
       id
       excerpt(pruneLength: 160)
       html
+      fields{
+        slug
+      }
       frontmatter {
         title
-        date(formatString: "MMMM DD, YYYY")
-        description
+        featuredImage{
+          childImageSharp {
+            fluid(maxWidth: 700) {
+              ...GatsbyImageSharpFluid_withWebp
+                    }
+                }
+        }
       }
     }
   }

@@ -1,0 +1,84 @@
+.header{
+    background:white;
+    -webkit-box-shadow: 0px 0px 7px -4px rgba(0,0,0,0.69); 
+    box-shadow: 0px 0px 7px -4px rgba(0,0,0,0.69);
+    display: flex;
+    justify-content: space-between;
+    height: 49px;
+    position: fixed;
+    left:0;
+    right:0;
+    z-index:99;
+    top:0;
+    @media screen and (min-width:1400px){
+      position: relative;
+      margin:0 auto;
+      width:1400px;  
+    }
+    a{
+        color:rgba(0,0,0,.80);
+        margin:1rem 5rem 1rem 1rem; 
+    }
+    a:hover, a:visited, a:link, a:active
+{
+    text-decoration-color: transparent;
+}
+
+    .homecontainer{
+        display: flex;
+        align-content: center;
+        height:100%;
+        .logo{
+            width:47px;
+            
+        }
+        .logoLink{
+            width:50px;
+            height:41px;
+            position :absolute;
+            top:0px;
+            margin-top:2px;
+            left:15px;
+        }
+        .logoLink:focus{
+            border:3px  #66BC45 solid;
+        }
+        a{
+            outline:0;
+        }
+        a:hover, a:visited, a:link, a:active
+{
+    text-decoration-color: transparent;
+}
+    }
+    .navbarcontainer{
+        display: flex;
+        margin-right:2rem;
+        
+        div{
+
+            height:49px;
+            display:flex;
+            align-items: center;
+            
+            a{
+                display: block;
+                margin:0 auto;
+                padding:0 1rem;
+                text-decoration: none;
+                
+            }
+            a:hover,a:focus{
+                background: #66BC45;
+                color:white;
+            }
+        }
+        div:hover,div:focus{
+            background: #66BC45;
+            a{
+                color:white;
+            }
+
+        }
+    }
+}

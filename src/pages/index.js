@@ -1,46 +1,54 @@
-import React from "react"
-import { Link, graphql } from "gatsby"
-
-import Bio from "../components/bio"
+import React, {useState} from "react"
+import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import { rhythm } from "../utils/typography"
+//import Head from "../components/head"
+import PostList from "../components/postList"
 
-const BlogIndex = ({ data, location }) => {
-  const siteTitle = data.site.siteMetadata.title
+const BlogIndex = ({ data }) => {
   const posts = data.allMarkdownRemark.edges
-
+  const allCategories = [];
+  console.log(posts)
+  posts.forEach(({node})=>{
+    let cat = node.frontmatter.categories;
+    if(cat!==null){
+      let cat = node.frontmatter.categories.split(',');
+    cat.forEach(item=>{
+    if(!allCategories.includes(item)){
+        allCategories.push(item)
+       }
+     })}
+  })
+  console.log(allCategories)
+  const [active,setActive]=useState("all");
+  const filteredPosts=[];
+  const getFilteredPosts=(posts,active)=>{
+      posts.forEach(post=>{ 
+        if(post.node.frontmatter.categories!==null){
+          let postCategories=post.node.frontmatter.categories.split(',');
+          console.log(postCategories)
+          if(postCategories.includes(active)){
+            filteredPosts.push(post.node);
+            console.log(post.node)
+          }
+        }
+        //let postCategories=post.node.frontmatter.categories.split(',');
+      });
+      return filteredPosts
+    }
   return (
-    <Layout location={location} title={siteTitle}>
-      <SEO title="All posts" />
-      <Bio />
-      {posts.map(({ node }) => {
-        const title = node.frontmatter.title || node.fields.slug
-        return (
-          <article key={node.fields.slug}>
-            <header>
-              <h3
-                style={{
-                  marginBottom: rhythm(1 / 4),
-                }}
-              >
-                <Link style={{ boxShadow: `none` }} to={node.fields.slug}>
-                  {title}
-                </Link>
-              </h3>
-              <small>{node.frontmatter.date}</small>
-            </header>
-            <section>
-              <p
-                dangerouslySetInnerHTML={{
-                  __html: node.frontmatter.description || node.excerpt,
-                }}
-              />
-            </section>
-          </article>
-        )
-      })}
-    </Layout>
+    <Layout data={data}>
+    <SEO title="Home of Improper design" />
+    <h1 className="introH1">The <span>Design Work</span> of  Ian McGillivray</h1>
+    <div className="catContainer">
+    {allCategories.map(node => (
+      <button id={node+'-button'} onClick={()=>{setActive(node);}}>
+        {node.toUpperCase()}
+      </button>
+    ))}
+    </div>
+    <PostList data={getFilteredPosts(posts,active)} activeCat={active}/>
+  </Layout>
   )
 }
 
@@ -51,6 +59,20 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
+        author
+      }
+    }
+    file(name: {eq: "logo"}) {
+      childImageSharp {
+        fluid {
+          aspectRatio
+          base64
+          src
+          srcSet
+          tracedSVG
+          srcWebp
+          srcSetWebp
+        }
       }
     }
     allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
@@ -63,7 +85,14 @@ export const pageQuery = graphql`
           frontmatter {
             date(formatString: "MMMM DD, YYYY")
             title
-            description
+            categories
+            featuredImage{
+              childImageSharp {
+                fluid(maxWidth: 700) {
+                  ...GatsbyImageSharpFluid_withWebp
+                        }
+                    }
+            }
           }
         }
       }

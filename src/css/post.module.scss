@@ -1,0 +1,49 @@
+.post{
+    max-width: 1024px;
+    margin: 2rem;
+    width: 100%;
+    h1{
+        font-family: "Roboto"; 
+    }
+
+}
+.sliderContainer{
+    width:100%;
+}
+
+.content{
+    font-family: "Roboto";
+    line-height: 1.55rem;
+    display: flex;
+    flex-wrap: wrap;
+}
+.article{
+    max-width:650px;
+    min-width: 250px;
+    margin:1rem auto;
+}
+.imageContainer{
+    height:100%;
+    width:250px;
+    margin:0 auto;
+    padding:1rem;
+
+}
+.inline_image{
+    max-width:500px;
+    margin:3rem;
+}
+.galleryContainer{
+    width:100%;
+}
+
+nav{
+    ul{
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:space-between;
+        list-style:none;
+        padding: 0;
+        margin-bottom:1rem;
+    }
+}
