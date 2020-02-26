@@ -1,13 +1,19 @@
 
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400|Roboto:300,400,500');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,400|Roboto:300,400,500&display=swap');
 /*Variables*/
 $primary:rgba(0,0,0,.78);
 $green:#66BC45;
+
 body{
     font-family: 'Open Sans', sans-serif !important;
-    font-display: swap;
+font-display: swap;
     font-weight: 400;
-    color: $primary; 
+    color: $primary;
+    
+   
+}
+main {
+    padding: 2rem;
 }
 h1{
     font-weight: 500; 
@@ -19,23 +25,23 @@ h1{
     margin:2rem;
 }
 .introH1{
-    margin: 4rem 0 3rem 2rem;
+    margin-top: 2rem;
 }
 .catContainer{
-    width:100vw;
-    max-width: 1400px;
     display: flex;
-    margin-left:.5rem;
     justify-content: left;
     @media screen and (max-width:972px){
         flex-wrap: wrap;
     }
     flex-wrap: wrap;
+    margin-top: 2rem;
     button{
         background: transparent;
         margin:.15rem;
-        width:auto;
+        min-width:100px;
         min-height:2rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
     }
     button:hover{
         background:$green;

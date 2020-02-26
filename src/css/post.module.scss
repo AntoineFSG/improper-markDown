@@ -1,16 +1,11 @@
 .post{
     max-width: 1024px;
     margin: 2rem;
-    width: 100%;
     h1{
         font-family: "Roboto"; 
     }
 
 }
-.sliderContainer{
-    width:100%;
-}
-
 .content{
     font-family: "Roboto";
     line-height: 1.55rem;
@@ -33,10 +28,8 @@
     max-width:500px;
     margin:3rem;
 }
-.galleryContainer{
-    width:100%;
-}
 
+//bottom articles navigation
 nav{
     ul{
         display:flex;

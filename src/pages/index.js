@@ -65,13 +65,7 @@ export const pageQuery = graphql`
     file(name: {eq: "logo"}) {
       childImageSharp {
         fluid {
-          aspectRatio
-          base64
-          src
-          srcSet
-          tracedSVG
-          srcWebp
-          srcSetWebp
+          ...GatsbyImageSharpFluid_withWebp_tracedSVG
         }
       }
     }
@@ -89,7 +83,7 @@ export const pageQuery = graphql`
             featuredImage{
               childImageSharp {
                 fluid(maxWidth: 700) {
-                  ...GatsbyImageSharpFluid_withWebp
+                  ...GatsbyImageSharpFluid_withWebp_tracedSVG
                         }
                     }
             }
