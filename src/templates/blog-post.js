@@ -7,6 +7,7 @@ import SlideShow from "../components/slideShow"
 import postStyles from "../css/post.module.scss"
 import Parser from "../components/parser"
 import Gallery from "../components/gallery"
+import Head from "../components/head"
 
 
 const BlogPostTemplate = ({ data, pageContext, location }) => {
@@ -18,6 +19,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
 
   return (
     <Layout location={location} title={siteTitle}>
+      <Head pageTitle={post.frontmatter.title}/>
       <SEO
         title={post.frontmatter.title}
         description={post.excerpt}

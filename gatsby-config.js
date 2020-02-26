@@ -2,7 +2,7 @@ module.exports = {
   siteMetadata: {
     title: `The portFolio of Ian McGillivray`,
     author: `Ian McGillivray`,
-    description: `Iam McGillivray Designer's PortFolio`,
+    description: `Ian McGillivray Designer's PortFolio`,
     siteUrl: `https://improperdesign.com`,
   },
   plugins: [
