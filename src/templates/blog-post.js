@@ -10,7 +10,7 @@ import Gallery from "../components/gallery"
 import Head from "../components/head"
 
 
-const BlogPostTemplate = ({ data, pageContext, location }) => {
+const BlogPostTemplate = ({ data, pageContext }) => {
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata.title
   const { previous, next } = pageContext
@@ -18,7 +18,7 @@ const BlogPostTemplate = ({ data, pageContext, location }) => {
   const {galleryImages} = pageContext
 
   return (
-    <Layout location={location} title={siteTitle}>
+    <Layout title={siteTitle}>
       <Head pageTitle={post.frontmatter.title}/>
       <SEO
         title={post.frontmatter.title}
